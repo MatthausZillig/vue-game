@@ -57,9 +57,16 @@ export default createStore({
       character === state.character ? (state.score += 13) : (state.score -= 13);
       if (state.questionIndex < state.questions.length - 1) {
         state.questionIndex++;
+      } else {
+        Math.sign(state.score) > 0
+          ? (state.uiState = "win")
+          : (state.uiState = "lose");
       }
     },
+    restartGame(state) {
+      state.uiState = "start";
+      state.score = 0;
+      state.questionIndex = 0;
+    },
   },
-  actions: {},
-  modules: {},
 });
